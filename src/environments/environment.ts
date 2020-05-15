@@ -4,6 +4,8 @@
 
 export const environment = {
   production: false
+  //api thing we did in the sms
+  //idk what it was
 };
 
 /*
