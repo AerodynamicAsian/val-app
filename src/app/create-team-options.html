@@ -1,0 +1,40 @@
+<body>
+    <h1>Create A Team</h1>
+    <p>Players Needed</p>
+    
+    <select [(ngModel)]="data.requestedPlayers">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+    </select>
+
+    <p>Activity</p>
+    <mat-button-toggle-group #togglegroup = "matButtonToggleGroup" [(ngModel)]="data.activity">
+        <mat-button-toggle value="Unrated">Unrated</mat-button-toggle>
+        <mat-button-toggle value="Competitive">Competitive</mat-button-toggle>
+    </mat-button-toggle-group>
+    
+    <p>Language</p>
+    <select [(ngModel)]="data.language">
+        <option value="English">English</option>
+        <option value="Français">Français</option>
+        <option value="Español">Español</option>
+        <option value="Deutsch">Deutsch</option>
+        <option value="Italiano">Italiano</option>
+        <option value="日本語">日本語</option>
+        <option value="Português">Português (Brasil)</option>
+        <option value="Русский">Русский</option>
+        <option value="Polski">Polski</option>
+        <option value="한국어">한국어</option>
+        <option value="繁體中文	">繁體中文	</option>
+    </select>
+
+    <p>Need Mic</p>
+    <select [(ngModel)]="data.needsMic">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+    </select>
+
+    <button mat-raised-button [mat-dialog-close]="data" cdkFocusInitial>Post</button>
+</body>

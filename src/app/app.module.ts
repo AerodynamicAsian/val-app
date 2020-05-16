@@ -4,16 +4,18 @@ import { MatTableModule} from '@angular/material/table';
 
 import {MatDialogModule} from '@angular/material/dialog'
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppComponent, CreateTeamOptions } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CreateTeamOptionsComponent } from './create-team-options/create-team-options.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreateTeamOptionsComponent
+    CreateTeamOptions
   ],
   imports: [
     BrowserModule,
@@ -22,9 +24,11 @@ import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
     ,MatTableModule
     ,MatDialogModule
     ,MatButtonModule
+    ,MatButtonToggleModule
+    ,FormsModule
   ],
 
-  entryComponents: [CreateTeamOptionsComponent
+  entryComponents: [CreateTeamOptions
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}

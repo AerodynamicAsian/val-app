@@ -289,11 +289,11 @@
       visibility: hidden;
     }
   }
-
-  table, th, td {
-    border: 1px solid black;
-  }
-
+  
   #lfgreqtitle{
     align-self: center;
+  }
+
+  table {
+    width: 100%;
   }
