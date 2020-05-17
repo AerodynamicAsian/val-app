@@ -1,6 +1,7 @@
 export class RequestModel{
-    riotID: string;
-    playerName: string;
-    requestedPlayers: string;
-    minRank: string;
+    RiotID: string;
+    PlayersNeeded: string;
+    Activity: string;
+    Language: string;
+    NeedMic: string;
 }

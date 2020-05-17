@@ -3,9 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
   //api thing we did in the sms
   //idk what it was
+  API_URL: 'http://localhost:3000'
 };
 
 /*

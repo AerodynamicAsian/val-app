@@ -1,32 +1,17 @@
 import { Component, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogClose, MatDialogConfig} from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
+import {RequestModel} from 'src/models/lfgRequestModel'
+import {LFGService} from 'src/services/lfgService';
+import { FormGroup } from '@angular/forms';
 
 export interface DialogData {
-  requestedPlayers: string;
-  activity: string;
-  language: string;
-  needsMic: string;
+  RiotID: string;
+  PlayersNeeded: string;
+  Activity: string;
+  Language: string;
+  NeedMic: string;
 }
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
 
 @Component({
   selector: 'app-root',
@@ -34,41 +19,52 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  form: FormGroup;
   title = 'val-app';
 
 
-  requestedPlayers : string;
-  activity : string;
-  language: string;
-  needsMic: string;
+  RiotID: string;
+  PlayersNeeded: string;
+  Language: string;
+  NeedMic: string;
+  Activity: string;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private lfgrequest: LFGService) {}
+
+  ngOnInit() {
+    this.lfgrequest.read().subscribe((data: DialogData[]) => { //? api call to get posts
+      console.log(data);
+      this.dataSource.data = data.reverse();
+    }); 
+  }
 
   openDialog(){
+    const val = this.form.value;
     const dialogConfig = new MatDialogConfig();
 
     let dialogRef = this.dialog.open(CreateTeamOptions, {
       height: '375px',
       width: '237px',
-      data: {requestedPlayers: this.requestedPlayers, activity: this.activity, language: this.language, needsMic: this.needsMic}
+      data: {requestedPlayers: this.PlayersNeeded, activity: this.Activity, language: this.Language, needsMic: this.NeedMic, riotID: this.RiotID, post: this.postrequests()}
     });
-
     dialogRef.afterClosed().subscribe(result =>{
-      console.log('Dialog result is: '+ result.activity);
-      this.requestedPlayers = result.requestedPlayers;
-      this.activity = result.activity;
-      this.language = result.language;
-      this.needsMic = result.needsMic;
+      this.PlayersNeeded = result.requestedPlayers;
+      this.Activity = result.activity;
+      this.Language = result.language;
+      this.NeedMic = result.needsMic;
+      this.RiotID = result.riotID;
+
     });
   }
-
-
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
-  
-  sendToDataBase(){
-
+  postrequests(){
+    this.lfgrequest.write(this.RiotID, this.PlayersNeeded, this.Language, this.NeedMic, "Null")
+    console.log("sending to database")
   }
+
+  dataSource = new MatTableDataSource<RequestModel>([]);
+  displayedColumns: string[] = ['RiotID', 'PlayersNeeded', 'Language', 'NeedMic'];
+  
+  visible = true;
 }
 
 @Component({
