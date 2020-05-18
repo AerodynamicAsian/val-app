@@ -1,9 +1,12 @@
 <form [formGroup]="form">
     <h1>Create A Team</h1>
-    <!--{{RiotID}}-->
+    <p>RiotID/PlayerName</p>
+    <p>format: (RiotID)(#Tagline)</p>
+    <input  matInput formControlName="riotID">
+
     <p>Players Needed</p>
     
-    <select [(ngModel)]="data.PlayersNeeded">
+    <select formControlName="playersNeeded">
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -11,13 +14,13 @@
     </select>
 
     <p>Activity</p>
-    <mat-button-toggle-group #togglegroup = "matButtonToggleGroup" [(ngModel)]="data.Activity">
+    <mat-button-toggle-group #togglegroup = "matButtonToggleGroup" formControlName="activity_">
         <mat-button-toggle value="Unrated">Unrated</mat-button-toggle>
         <mat-button-toggle value="Competitive">Competitive</mat-button-toggle>
     </mat-button-toggle-group>
     
     <p>Language</p>
-    <select [(ngModel)]="data.Language">
+    <select formControlName="language_">
         <option value="English">English</option>
         <option value="Français">Français</option>
         <option value="Español">Español</option>
@@ -32,10 +35,9 @@
     </select>
 
     <p>Need Mic</p>
-    <select [(ngModel)]="data.NeedMic">
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
+    <select formControlName="needMic">
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
     </select>
-
-    <button mat-raised-button [mat-dialog-close]="data" cdkFocusInitial>Post</button>
 </form>
+<button mat-button color="primary" cdkFocusInitial (click)="post()">Post</button>

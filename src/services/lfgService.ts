@@ -13,15 +13,25 @@ export class LFGService {
 
     constructor(private http: HttpClient) {}
 
-    write(RiotID: string, PlayersNeeded: string, Language: string, NeedMic: string, enddate: string) {
+    write(RiotID: string, PlayersNeeded: string, Activity: string, Language: string, NeedMic: string) {
         const options = { headers: new HttpHeaders({
                 'Content-Type': 'application/json'
         })};
         // tslint:disable-next-line: max-line-length
-        return this.http.post(`${API_URL}/api/notices`, { RiotID, PlayersNeeded, Language, NeedMic, enddate }, options);
+        console.log(Activity);
+        return this.http.post(`${API_URL}/api/notices`, { RiotID, PlayersNeeded, Activity, Language, NeedMic}, options);
     }
 
     read() {
         return this.http.get(`${API_URL}/api/notices`);
+    }
+
+    playerJoin(RiotID: string, PlayersNeeded: string, Activity: string, Language: string, NeedMic: string){
+        console.log("pre options");
+        const options = { headers: new HttpHeaders({
+            'Content-Type': 'application/json'
+    })};
+        console.log("pre posting to server");
+        return this.http.post(`${API_URL}/api/playerjoined`, {RiotID, PlayersNeeded, Activity, Language, NeedMic}, options);
     }
 }

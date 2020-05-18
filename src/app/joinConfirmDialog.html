@@ -1,0 +1,14 @@
+<h1>Join {{data.RiotID}}</h1>
+
+<p>To join this player in game add them as a friend in game using thier Riot ID and Tagline</p>
+<p>The tagline is the # and numbers after the hashtag</p>
+
+
+<h2>Team Requirements</h2>
+<p>Require Mic: {{data.NeedMic}}</p>
+<p>Activity Playing: {{data.Activity}}</p>
+<p>Required Language: {{data.Language}}</p>
+<h3>To join team press Confirm and add them in game</h3>
+
+
+<button mat-raised-button color="accent" cdkFocusInitial (click)="joinTeam()">Confirm</button>

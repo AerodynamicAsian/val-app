@@ -18,10 +18,12 @@
     
     <a class="card" target="_blank" rel="noopener" (click)="openDialog()">
       <img class="createteamicon" src="https://image.flaticon.com/icons/png/512/1189/1189206.png" alt="handshake" width="45" height="45">
-
       <span>Create Team</span>
     </a>
-
+    <a class="card" target="_blank" rel="noopener" (click)="refreshTable()">
+      <img src="https://image.flaticon.com/icons/svg/560/560463.svg" alt="refresh" width="35" height="35">
+      <span>Refresh Table</span>
+    </a>
   </div>
   <div>
     <h2 id="lfgreqtitle">Current LFG Requests, resets after 24 hours</h2>
@@ -48,10 +50,16 @@
   
     <!-- Name Column -->
     <ng-container matColumnDef="PlayersNeeded">
-      <th mat-header-cell *matHeaderCellDef> P. Needed </th>
+      <th mat-header-cell *matHeaderCellDef> Players Needed </th>
       <td mat-cell *matCellDef="let lfgrequest"> {{lfgrequest.PlayersNeeded}} </td>
     </ng-container>
-  
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Activity">
+      <th mat-header-cell *matHeaderCellDef> Activity </th>
+      <td mat-cell *matCellDef="let lfgrequest"> {{lfgrequest.Activity}} </td>
+    </ng-container>
+
     <!-- Weight Column -->
     <ng-container matColumnDef="Language">
       <th mat-header-cell *matHeaderCellDef> Language </th>
@@ -63,11 +71,19 @@
       <th mat-header-cell *matHeaderCellDef> NeedMic </th>
       <td mat-cell *matCellDef="let lfgrequest"> {{lfgrequest.NeedMic}} </td>
     </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell  *matHeaderCellDef > Actions </th>
+      <td mat-cell *matCellDef="let lfgrequest" >
+        <button mat-raised-button color="accent" (click)="onJoin(lfgrequest)">Join</button>
+      </td>
+    </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
   </table>
-  
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>  
 
 
 </div>
